@@ -1,4 +1,4 @@
-name: Build Sable Android Patch for Sable 2.0.5
+name: Build Sable Android Patch for Sable 2.0.4
 
 on:
   push:
@@ -23,11 +23,11 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Mark patch as Sable 2.0.5 compatible
+      - name: Mark patch as Sable 2.0.4 compatible
         working-directory: sable-android-patch
         run: |
-          sed -i 's/version="2.0.3"/version="2.0.5"/' src/main/resources/META-INF/neoforge.mods.toml
-          sed -i 's/mod_version=2.0.3/mod_version=2.0.5/' gradle.properties
+          sed -i 's/version="2.0.3"/version="2.0.4"/' src/main/resources/META-INF/neoforge.mods.toml
+          sed -i 's/mod_version=2.0.3/mod_version=2.0.4/' gradle.properties
 
       - name: Build patch
         working-directory: sable-android-patch
@@ -36,5 +36,5 @@ jobs:
       - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
-          name: Sable-Android-Patch-for-Sable-2.0.5
+          name: Sable-Android-Patch-for-Sable-2.0.4
           path: sable-android-patch/build/libs/*.jar
