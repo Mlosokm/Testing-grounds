@@ -5,7 +5,7 @@ A checked item means implemented in source, not necessarily verified in a live M
 ## Foundation
 - [x] Forge 1.20.1, Java 17, mod ID piremastered.
 - [x] Dedicated creative tab and reproducible GitHub Actions build.
-- [x] Industrial Engineer's Manual item.
+- [x] Industrial Engineer's Manual item (improved step-by-step text).
 - [x] Replace first-pass boiler textures and GUI with a coordinated steel/copper pixel-art set.
 - [ ] In-game client and Android-launcher verification.
 
@@ -13,11 +13,12 @@ A checked item means implemented in source, not necessarily verified in a live M
 - [x] Connected shell validator with 3×3×3 minimum and 15×15×15 maximum bounding dimensions.
 - [x] Boiler Casing required on every frame edge and corner.
 - [x] Structural Glass allowed on flat face panels.
-- [x] Standard Burner, High-Tier Burner and Boiler Superheater.
-- [x] High-Tier Burner restricted to the high_tier_fuels item tag.
-- [x] High-Tier Burner produces distinct Superheated Steam.
-- [x] Horizontal Water → Burner → Steam screen with vertical meters and visual flame recession; no burn-tick or pressure percentage text.
-- [x] Redstone signal from the current access/controller block when valid.
+- [x] Standard Burner (Solid-Fuel Burner).
+- [x] Structure error feedback on right-click when invalid.
+- [x] Self-drawn GUI with water / fuel / temp / steam meters and IGNITE button.
+- [x] Horizontal Water → Burner → Steam screen with vertical meters.
+- [x] Redstone signal from the access/controller block when formed.
+- [ ] High-Tier Burner and Superheated Steam.
 - [ ] Controller-free operation and right-click access from any component.
 - [ ] Optional temporary tank blocks and dynamic capacity.
 - [ ] In-game multiblock, fuel, pipe and save/reload verification.
