@@ -17,15 +17,19 @@ public class IndustrialManualItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (!level.isClientSide) {
-            player.sendSystemMessage(Component.literal("=== PI REMASTERED: INDUSTRIAL ENGINEER'S MANUAL ==="));
-            player.sendSystemMessage(Component.literal("BOILER: build a sealed shell, at least 3x3x3 and at most 15x15x15."));
-            player.sendSystemMessage(Component.literal("Use Boiler Casing on every corner and frame edge; flat faces may use Structural Glass."));
-            player.sendSystemMessage(Component.literal("Place one Solid-Fuel Burner inside the chamber and feed it combustible items through item automation."));
-            player.sendSystemMessage(Component.literal("Open the boiler panel and press IGNITE to start the loaded fuel. The burner does not light itself."));
-            player.sendSystemMessage(Component.literal("Place two Multipurpose Valves in the shell. The valve holding water is detected as the inlet; the other is the steam outlet."));
-            player.sendSystemMessage(Component.literal("Multipurpose Valves expose Forge fluid capability for connected fluid pipes. Steam leaving a valve carries its temperature metadata."));
-            player.sendSystemMessage(Component.literal("The boiler temperature is simulated from the active fuel profile and cools toward ambient when heat stops."));
-            player.sendSystemMessage(Component.literal("Closed-loop heating, exotic coolants, and additional burner types are planned for later development."));
+            player.sendSystemMessage(Component.literal("§6§l=== PI REMASTERED: INDUSTRIAL ENGINEER'S MANUAL ==="));
+            player.sendSystemMessage(Component.literal("§e1. Build a sealed shell (3x3x3 to 15x15x15)."));
+            player.sendSystemMessage(Component.literal("§e   - Corners & edges: Boiler Casing"));
+            player.sendSystemMessage(Component.literal("§e   - Flat faces: Casing or Structural Glass"));
+            player.sendSystemMessage(Component.literal("§e2. Place one Solid-Fuel Burner inside the chamber."));
+            player.sendSystemMessage(Component.literal("§e3. Insert two Multipurpose Valves into the shell."));
+            player.sendSystemMessage(Component.literal("§e   - Put water in one valve (inlet)"));
+            player.sendSystemMessage(Component.literal("§e   - The other becomes the steam outlet"));
+            player.sendSystemMessage(Component.literal("§e4. Feed fuel into the burner (hoppers/pipes work)."));
+            player.sendSystemMessage(Component.literal("§e5. Right-click the Industrial Boiler panel and press IGNITE."));
+            player.sendSystemMessage(Component.literal("§aValves expose Forge fluid capability for pipes."));
+            player.sendSystemMessage(Component.literal("§aSteam carries temperature metadata."));
+            player.sendSystemMessage(Component.literal("§7If the structure is invalid, the panel will tell you why."));
         }
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
     }
