@@ -157,14 +157,33 @@ public class BoilerControllerBlockEntity extends BlockEntity implements MenuProv
 
         BoilerStructureValidator.Result result = BoilerStructureValidator.validate(level, worldPosition);
         formed = result.valid();
-        burnerPos = formed ? result.solidFuelBurner() : null;
-        waterValvePos = formed ? result.waterValve() : null;
-        steamValvePos = formed ? result.steamValve() : null;
-
         if (!formed) {
+            burnerPos = null;
+            waterValvePos = null;
+            steamValvePos = null;
             progress = 0;
             running = false;
+            return;
         }
+
+        burnerPos = result.solidFuelBurner();
+        boolean keepValveRoles = waterValvePos != null
+                && steamValvePos != null
+                && result.valves().contains(waterValvePos)
+                && result.valves().contains(steamValvePos)
+                && isValveTankEmpty(waterValvePos)
+                && isValveTankEmpty(steamValvePos);
+
+        if (!keepValveRoles) {
+            waterValvePos = result.waterValve();
+            steamValvePos = result.steamValve();
+        }
+    }
+
+    private boolean isValveTankEmpty(BlockPos pos) {
+        return level != null
+                && level.getBlockEntity(pos) instanceof BoilerMultipurposeValveBlockEntity valve
+                && valve.getTank().getFluid().isEmpty();
     }
 
     private BoilerFireboxBlockEntity getBurner() {

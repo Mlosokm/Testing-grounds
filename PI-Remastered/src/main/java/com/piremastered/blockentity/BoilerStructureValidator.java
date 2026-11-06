@@ -21,9 +21,10 @@ public final class BoilerStructureValidator {
             BlockPos solidFuelBurner,
             BlockPos waterValve,
             BlockPos steamValve,
+            List<BlockPos> valves,
             String error) {
         private static Result invalid(String message) {
-            return new Result(false, null, null, null, message);
+            return new Result(false, null, null, null, List.of(), message);
         }
     }
 
@@ -151,7 +152,7 @@ public final class BoilerStructureValidator {
             return Result.invalid("The boiler needs two separate Multipurpose Valves");
         }
 
-        return new Result(true, burner, waterValve, steamValve, "");
+        return new Result(true, burner, waterValve, steamValve, List.copyOf(valves), "");
     }
 
     private static net.minecraft.world.level.material.Fluid fluidAt(Level level, BlockPos pos) {
