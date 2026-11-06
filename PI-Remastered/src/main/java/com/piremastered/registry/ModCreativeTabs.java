@@ -10,9 +10,14 @@ public final class ModCreativeTabs {
   .title(Component.translatable("itemGroup.piremastered.main"))
   .icon(()->new ItemStack(ModItems.INDUSTRIAL_BOILER.get()))
   .displayItems((parameters,output)->{
-   output.accept(ModItems.INDUSTRIAL_BOILER.get()); output.accept(ModItems.BOILER_CASING.get());
-   output.accept(ModItems.BOILER_FIREBOX.get()); output.accept(ModItems.BOILER_WATER_INPUT.get());
-   output.accept(ModItems.BOILER_STEAM_OUTPUT.get()); output.accept(ModItems.BOILER_PRESSURE_GAUGE.get());
+   output.accept(ModItems.INDUSTRIAL_MANUAL.get());output.accept(ModItems.INDUSTRIAL_BOILER.get());
+   output.accept(ModItems.BOILER_CASING.get());output.accept(ModItems.BOILER_STRUCTURAL_GLASS.get());output.accept(ModItems.BOILER_FIREBOX.get());
+   output.accept(ModItems.BOILER_HIGH_TIER_BURNER.get());output.accept(ModItems.BOILER_SUPERHEATER.get());output.accept(ModItems.BOILER_WATER_INPUT.get());
+   output.accept(ModItems.BOILER_STEAM_OUTPUT.get());output.accept(ModItems.BOILER_PRESSURE_GAUGE.get());
+   output.accept(ModItems.TURBINE_CASING.get());output.accept(ModItems.TURBINE_STRUCTURAL_GLASS.get());output.accept(ModItems.TURBINE_VALVE.get());
+   output.accept(ModItems.TURBINE_ROTOR_SHAFT.get());output.accept(ModItems.TURBINE_ROTATION_COMPLEX.get());
+   output.accept(ModItems.TURBINE_BLADE_COPPER.get());output.accept(ModItems.TURBINE_BLADE_GOLD.get());output.accept(ModItems.TURBINE_BLADE_IRON.get());
+   output.accept(ModItems.TURBINE_BLADE_DIAMOND.get());output.accept(ModItems.TURBINE_BLADE_NETHERITE.get());
   }).build());
  private ModCreativeTabs(){}
 }

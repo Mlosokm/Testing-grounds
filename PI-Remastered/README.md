@@ -1,21 +1,23 @@
-# PI Remastered
+# PI Remastered 0.3.0
 
-Industrial machinery for Minecraft Java 1.20.1, Forge 47.4.10, Java 17.
+Minecraft Java 1.20.1 · Forge 47.4.10 · Java 17
 
-## Modular industrial boiler
+## Boiler construction update
 
-The boiler is a hollow 3x3x3 shell. Place the controller at the centre of the front face; it faces outward. Build the rest of the shell behind it. Leave the exact centre block of the middle layer empty.
+The boiler uses a connected casing shell with a rectangular bounding size from 3×3×3 through 15×15×15. All twelve frame edges and corners must be Boiler Casing. Flat face panels may be Boiler Casing or Boiler Structural Glass. The shell must be complete.
 
-- Boiler casing fills the remaining shell.
-- At least one firebox belongs on the bottom layer.
-- At least one water-input hatch and one steam-output hatch belong on the top layer.
-- At least one pressure gauge belongs on either side column.
-- Right-click the controller to open the live status screen.
+Inside the shell, place at least one Standard Burner (or High-Tier Burner), a Boiler Water Input Hatch and a Boiler Steam Output Hatch. A High-Tier Burner additionally requires at least one Boiler Superheater. The existing Industrial Boiler Access Panel remains the current multiblock validation and ticking anchor in 0.3.0; controller-free right-click access is not implemented yet.
 
-The water-input hatch accepts water through Forge fluid capabilities and stores 16,000 mB. The firebox accepts valid furnace fuels through Forge item capabilities (so hoppers and item pipes can load it). While the structure has water, output capacity and fuel, the controller converts water to PI steam at 1 mB per burn tick. The steam-output hatch stores 16,000 mB and exposes the registered piremastered:steam fluid to Forge fluid pipes.
+The Standard Burner accepts ordinary furnace fuels. The High-Tier Burner accepts burnable items listed in the piremastered:high_tier_fuels item tag (initially blaze rods, lava buckets and coal blocks). With a High-Tier Burner and a Boiler Superheater, the boiler produces piremastered:superheated_steam; otherwise it produces piremastered:steam. Both fluids are exposed by the steam output hatch's Forge fluid capability.
 
-All six blocks are registered with block items, recipes, drops, models, names, and entries in the PI Remastered creative tab. The steam engine is intentionally outside this milestone.
+Use the in-game Industrial Engineer's Manual for the current build notes. The boiler screen now follows a horizontal Water → Burner → Steam layout with vertical meters and a shrinking flame icon. It no longer displays burn ticks or a pressure percentage.
 
-## Build
+## Turbine construction set
 
-Use Java 17 and run gradle --no-daemon clean build. The reobfuscated JAR is generated in build/libs/.
+Version 0.3.0 adds Turbine Casing, Structural Glass, Valve, Rotor Shaft, Rotation Complex and five blade materials (copper, gold, iron, diamond and netherite) to the creative tab with a coordinated texture set. Live rotor animation, the full structure validator, induction scanning and steam-to-FE generation are not yet implemented. The manual lists planned induction materials, but no FE values are claimed in this release.
+
+Planned induction materials are Lapis Lazuli, Copper, Iron, Gold, Diamond and Netherite blocks. Higher rarity is intended to produce more FE. Blade tiers are intended to trade pressure tolerance against rotational speed.
+
+## Build and test status
+
+Run gradle --no-daemon clean build with Java 17. A successful CI build proves compilation and packaging only; it does not replace in-game multiblock, fluid-pipe, GUI, save/reload or performance testing.

@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
+
 public class BoilerControllerBlock extends BaseEntityBlock {
  public static final DirectionProperty FACING=DirectionProperty.create("facing",Direction.Plane.HORIZONTAL);
  public BoilerControllerBlock(Properties properties){super(properties);registerDefaultState(stateDefinition.any().setValue(FACING,Direction.NORTH));}
@@ -23,11 +24,11 @@ public class BoilerControllerBlock extends BaseEntityBlock {
  @Override public RenderShape getRenderShape(BlockState state){return RenderShape.MODEL;}
  @Override public BlockState getStateForPlacement(net.minecraft.world.item.context.BlockPlaceContext context){return defaultBlockState().setValue(FACING,context.getHorizontalDirection().getOpposite());}
  @Override protected void createBlockStateDefinition(StateDefinition.Builder<net.minecraft.world.level.block.Block,BlockState> builder){builder.add(FACING);}
+ @Override public boolean isSignalSource(BlockState state){return true;}
+ @Override public int getSignal(BlockState state,net.minecraft.world.level.BlockGetter level,BlockPos pos,Direction direction){return level.getBlockEntity(pos) instanceof BoilerControllerBlockEntity be&&be.isFormed()?15:0;}
  @Override public InteractionResult use(BlockState state,Level level,BlockPos pos,Player player,InteractionHand hand,BlockHitResult hit){
-  if(!level.isClientSide&&player instanceof ServerPlayer serverPlayer&&level.getBlockEntity(pos) instanceof BoilerControllerBlockEntity be)NetworkHooks.openScreen(serverPlayer,be,pos);
+  if(!level.isClientSide&&player instanceof ServerPlayer sp&&level.getBlockEntity(pos) instanceof BoilerControllerBlockEntity be)NetworkHooks.openScreen(sp,be,pos);
   return InteractionResult.sidedSuccess(level.isClientSide);
  }
- @Nullable @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level,BlockState state,BlockEntityType<T> type){
-  return level.isClientSide?null:createTickerHelper(type,ModBlockEntities.BOILER_CONTROLLER.get(),BoilerControllerBlockEntity::serverTick);
- }
+ @Nullable @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level,BlockState state,BlockEntityType<T> type){return level.isClientSide?null:createTickerHelper(type,ModBlockEntities.BOILER_CONTROLLER.get(),BoilerControllerBlockEntity::serverTick);}
 }
