@@ -1,5 +1,10 @@
 {
-  "block.piremastered.industrial_boiler": "Industrial Boiler",
+  "itemGroup.piremastered.main": "PI Remastered",
+  "block.piremastered.industrial_boiler": "Industrial Boiler Controller",
   "block.piremastered.boiler_casing": "Boiler Casing",
-  "itemGroup.piremastered.main": "PI Remastered"
+  "block.piremastered.boiler_firebox": "Boiler Firebox",
+  "block.piremastered.boiler_water_input": "Boiler Water Input Hatch",
+  "block.piremastered.boiler_steam_output": "Boiler Steam Output Hatch",
+  "block.piremastered.boiler_pressure_gauge": "Boiler Pressure Gauge",
+  "fluid_type.piremastered.steam": "Industrial Steam"
 }

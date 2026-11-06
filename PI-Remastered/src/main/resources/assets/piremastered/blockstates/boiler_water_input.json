@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "piremastered:block/boiler_water_input"
+    }
+  }
+}

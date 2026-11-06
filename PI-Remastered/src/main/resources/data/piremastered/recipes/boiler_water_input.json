@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","pattern":["III","IBI","ICI"],"key":{"I":{"item":"minecraft:iron_ingot"},"B":{"item":"minecraft:bucket"},"C":{"item":"minecraft:blue_ice"}},"result":{"item":"piremastered:boiler_water_input"}}

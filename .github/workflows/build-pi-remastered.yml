@@ -1,51 +1,42 @@
 name: Build PI Remastered (Forge 1.20.1)
-
 on:
   push:
-    branches:
-      - pi-remastered
+    branches: [pi-remastered]
     paths:
       - 'PI-Remastered/**'
       - '.github/workflows/build-pi-remastered.yml'
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out PI Remastered
         uses: actions/checkout@v4
-
       - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
           cache: gradle
-
       - name: Set up Gradle 8.8
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.8'
-
       - name: Build reobfuscated Forge mod JAR
         working-directory: PI-Remastered
         run: gradle --no-daemon clean build
-
       - name: Verify generated JAR
         working-directory: PI-Remastered
         run: |
-          test -s build/libs/PI-Remastered-0.1.2.jar
-          file build/libs/PI-Remastered-0.1.2.jar
-          sha256sum build/libs/PI-Remastered-0.1.2.jar
-
+          test -s build/libs/PI-Remastered-0.2.0.jar
+          file build/libs/PI-Remastered-0.2.0.jar
+          sha256sum build/libs/PI-Remastered-0.2.0.jar
       - name: Upload installable mod JAR
         uses: actions/upload-artifact@v4
         with:
-          name: PI-Remastered-0.1.2
-          path: PI-Remastered/build/libs/PI-Remastered-0.1.2.jar
+          name: PI-Remastered-0.2.0
+          path: PI-Remastered/build/libs/PI-Remastered-0.2.0.jar
           if-no-files-found: error
           retention-days: 14

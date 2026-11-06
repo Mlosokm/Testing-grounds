@@ -1,6 +1,15 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
+      "model": "piremastered:block/industrial_boiler"
+    },
+    "facing=south": {
+      "model": "piremastered:block/industrial_boiler"
+    },
+    "facing=east": {
+      "model": "piremastered:block/industrial_boiler"
+    },
+    "facing=west": {
       "model": "piremastered:block/industrial_boiler"
     }
   }
