@@ -3,6 +3,7 @@ import com.piremastered.blockentity.BoilerControllerBlockEntity;
 import com.piremastered.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -27,7 +28,12 @@ public class BoilerControllerBlock extends BaseEntityBlock {
  @Override public boolean isSignalSource(BlockState state){return true;}
  @Override public int getSignal(BlockState state,net.minecraft.world.level.BlockGetter level,BlockPos pos,Direction direction){return level.getBlockEntity(pos) instanceof BoilerControllerBlockEntity be&&be.isFormed()?15:0;}
  @Override public InteractionResult use(BlockState state,Level level,BlockPos pos,Player player,InteractionHand hand,BlockHitResult hit){
-  if(!level.isClientSide&&player instanceof ServerPlayer sp&&level.getBlockEntity(pos) instanceof BoilerControllerBlockEntity be)NetworkHooks.openScreen(sp,be,pos);
+  if(!level.isClientSide&&player instanceof ServerPlayer sp&&level.getBlockEntity(pos) instanceof BoilerControllerBlockEntity be){
+   if(!be.isFormed() && !be.getLastError().isEmpty()){
+    sp.sendSystemMessage(Component.literal("Boiler structure invalid: " + be.getLastError()));
+   }
+   NetworkHooks.openScreen(sp,be,pos);
+  }
   return InteractionResult.sidedSuccess(level.isClientSide);
  }
  @Nullable @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level,BlockState state,BlockEntityType<T> type){return level.isClientSide?null:createTickerHelper(type,ModBlockEntities.BOILER_CONTROLLER.get(),BoilerControllerBlockEntity::serverTick);}
