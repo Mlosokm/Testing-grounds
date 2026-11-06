@@ -11,9 +11,9 @@ public class BoilerScreen extends AbstractContainerScreen<BoilerMenu> {
     public BoilerScreen(BoilerMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
         imageWidth = 208;
-        imageHeight = 132;
+        imageHeight = 140;
         titleLabelX = 8;
-        titleLabelY = 7;
+        titleLabelY = 6;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class BoilerScreen extends AbstractContainerScreen<BoilerMenu> {
             if (minecraft != null && minecraft.gameMode != null) {
                 minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 0);
             }
-        }).bounds(leftPos + 153, topPos + 112, 46, 14).build());
+        }).bounds(leftPos + 152, topPos + 118, 48, 16).build());
     }
 
     @Override
@@ -31,36 +31,41 @@ public class BoilerScreen extends AbstractContainerScreen<BoilerMenu> {
         int x = leftPos;
         int y = topPos;
 
-        // Dark steel panel background
-        graphics.fill(x, y, x + imageWidth, y + imageHeight, 0xFF1A1F24);
-        graphics.fill(x + 2, y + 2, x + imageWidth - 2, y + imageHeight - 2, 0xFF252B32);
+        // Main panel
+        graphics.fill(x, y, x + imageWidth, y + imageHeight, 0xFF14181C);
+        graphics.fill(x + 1, y + 1, x + imageWidth - 1, y + imageHeight - 1, 0xFF1E252C);
 
-        // Header bar
-        graphics.fill(x + 4, y + 4, x + imageWidth - 4, y + 18, 0xFF2E3640);
+        // Header
+        graphics.fill(x + 3, y + 3, x + imageWidth - 3, y + 16, 0xFF2A3340);
 
         int water = clamp(menu.getData(1), 0, 16_000);
         int steam = clamp(menu.getData(2), 0, 16_000);
-        int burn = menu.getData(5) <= 0 ? 0
-                : clamp(menu.getData(4) * 100 / menu.getData(5), 0, 100);
+        int burnTicks = menu.getData(4);
+        int totalBurn = menu.getData(5);
+        int burnPct = totalBurn <= 0 ? 0 : clamp(burnTicks * 100 / totalBurn, 0, 100);
         int temperature = clamp(menu.getData(6), 20, 1_200);
 
-        drawMeter(graphics, x, y, 20, water * 54 / 16_000, 0xFF3299D1);
-        drawMeter(graphics, x, y, 66, burn * 54 / 100, 0xFFFF922E);
-        drawMeter(graphics, x, y, 112, (temperature - 20) * 54 / 1_180, 0xFFE84A36);
-        drawMeter(graphics, x, y, 158, steam * 54 / 16_000, 0xFFE0E7E6);
+        drawMeter(graphics, x, y, 18, water * 52 / 16_000, 0xFF3AA0E0);
+        drawMeter(graphics, x, y, 64, burnPct * 52 / 100, 0xFFFF8C2A);
+        drawMeter(graphics, x, y, 110, (temperature - 20) * 52 / 1_180, 0xFFE85040);
+        drawMeter(graphics, x, y, 156, steam * 52 / 16_000, 0xFFD8E0DE);
 
-        String temperatureText = temperature + " C";
-        graphics.drawString(font, temperatureText, x + 104, y + 103, 0xFFFFB36B, false);
+        // Temperature readout
+        String tempText = temperature + "°C";
+        graphics.drawString(font, tempText, x + 102, y + 100, 0xFFFFC070, false);
+
+        // Fuel remaining
+        if (totalBurn > 0) {
+            graphics.drawString(font, burnPct + "%", x + 62, y + 100, 0xFFFFB060, false);
+        }
     }
 
     private void drawMeter(GuiGraphics graphics, int x, int y, int meterX, int filledHeight, int color) {
-        int bottom = y + 93;
-        // Track
-        graphics.fill(x + meterX, y + 36, x + meterX + 12, bottom + 2, 0xFF0E1216);
-        graphics.fill(x + meterX + 2, y + 38, x + meterX + 10, bottom, 0xFF101719);
+        int bottom = y + 92;
+        graphics.fill(x + meterX, y + 34, x + meterX + 14, bottom + 2, 0xFF0A0E12);
+        graphics.fill(x + meterX + 2, y + 36, x + meterX + 12, bottom, 0xFF12161A);
         if (filledHeight > 0) {
-            graphics.fill(x + meterX + 2, bottom - filledHeight,
-                    x + meterX + 10, bottom, color);
+            graphics.fill(x + meterX + 2, bottom - filledHeight, x + meterX + 12, bottom, color);
         }
     }
 
@@ -72,17 +77,17 @@ public class BoilerScreen extends AbstractContainerScreen<BoilerMenu> {
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
         graphics.drawString(font, title, titleLabelX, titleLabelY, 0xFFE8EEF2, false);
 
-        graphics.drawString(font, "WATER", 14, 24, 0xFFB9D9E5, false);
-        graphics.drawString(font, "FUEL", 63, 24, 0xFFFFC27D, false);
-        graphics.drawString(font, "TEMP", 109, 24, 0xFFFFA08B, false);
-        graphics.drawString(font, "STEAM", 153, 24, 0xFFE4E8E4, false);
+        graphics.drawString(font, "WATER", 12, 22, 0xFFA8D4E8, false);
+        graphics.drawString(font, "FUEL", 60, 22, 0xFFFFB878, false);
+        graphics.drawString(font, "TEMP", 106, 22, 0xFFFF9080, false);
+        graphics.drawString(font, "STEAM", 150, 22, 0xFFE0E8E4, false);
 
         String status = switch (menu.getData(0)) {
-            case 2 -> "RUNNING";
-            case 1 -> "FORMED - IDLE";
-            default -> "STRUCTURE INCOMPLETE";
+            case 2 -> "§aRUNNING";
+            case 1 -> "§eFORMED - IDLE";
+            default -> "§cINCOMPLETE";
         };
-        graphics.drawString(font, status, 10, 117, 0xFFE7E2D5, false);
+        graphics.drawString(font, status, 8, 122, 0xFFFFFFFF, false);
     }
 
     @Override
