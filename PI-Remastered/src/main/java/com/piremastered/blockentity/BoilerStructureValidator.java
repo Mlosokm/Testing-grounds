@@ -123,9 +123,9 @@ public final class BoilerStructureValidator {
             return Result.invalid("Two Multipurpose Valves are required: one for water and one for steam");
         }
 
-        valves.sort(Comparator.comparingInt(BlockPos::getX)
-                .thenComparingInt(BlockPos::getY)
-                .thenComparingInt(BlockPos::getZ));
+        valves.sort(Comparator.comparingInt((BlockPos p) -> p.getX())
+                .thenComparingInt((BlockPos p) -> p.getY())
+                .thenComparingInt((BlockPos p) -> p.getZ()));
 
         BlockPos waterValve = valves.stream()
                 .filter(pos -> fluidAt(level, pos) == Fluids.WATER)
