@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "piremastered:block/turbine_blade_netherite"
+  }
+}
