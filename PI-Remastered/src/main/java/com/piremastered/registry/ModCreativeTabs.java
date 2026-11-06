@@ -22,7 +22,6 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.BOILER_CASING.get());
                         output.accept(ModItems.BOILER_STRUCTURAL_GLASS.get());
                         output.accept(ModItems.BOILER_SOLID_FUEL_BURNER.get());
-                        output.accept(ModItems.BOILER_ELECTRIC_SUPERHEATER.get());
                         output.accept(ModItems.BOILER_MULTIPURPOSE_VALVE.get());
                     }).build());
 

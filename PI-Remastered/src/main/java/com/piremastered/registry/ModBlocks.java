@@ -38,12 +38,6 @@ public final class ModBlocks {
                     .mapColor(MapColor.COLOR_GRAY).strength(3.5F, 7).sound(SoundType.METAL)
                     .requiresCorrectToolForDrops().lightLevel(state -> 5)));
 
-    public static final RegistryObject<Block> BOILER_ELECTRIC_SUPERHEATER = BLOCKS.register(
-            "boiler_electric_superheater",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_ORANGE).strength(4, 8).sound(SoundType.METAL)
-                    .requiresCorrectToolForDrops().lightLevel(state -> 7)));
-
     public static final RegistryObject<Block> BOILER_MULTIPURPOSE_VALVE = BLOCKS.register(
             "boiler_multipurpose_valve",
             () -> new BoilerMultipurposeValveBlock(BlockBehaviour.Properties.of()

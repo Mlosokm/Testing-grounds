@@ -25,8 +25,6 @@ public final class ModItems {
             blockItem("boiler_structural_glass", ModBlocks.BOILER_STRUCTURAL_GLASS);
     public static final RegistryObject<Item> BOILER_SOLID_FUEL_BURNER =
             blockItem("boiler_solid_fuel_burner", ModBlocks.BOILER_SOLID_FUEL_BURNER);
-    public static final RegistryObject<Item> BOILER_ELECTRIC_SUPERHEATER =
-            blockItem("boiler_electric_superheater", ModBlocks.BOILER_ELECTRIC_SUPERHEATER);
     public static final RegistryObject<Item> BOILER_MULTIPURPOSE_VALVE =
             blockItem("boiler_multipurpose_valve", ModBlocks.BOILER_MULTIPURPOSE_VALVE);
 

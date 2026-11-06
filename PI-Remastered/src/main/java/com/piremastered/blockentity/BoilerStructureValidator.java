@@ -108,7 +108,7 @@ public final class BoilerStructureValidator {
                             if (burner == null) {
                                 burner = pos.immutable();
                             }
-                        } else if (!state.is(ModBlocks.BOILER_ELECTRIC_SUPERHEATER.get())) {
+                        } else {
                             return Result.invalid("An unsupported block is inside the boiler chamber");
                         }
                     }

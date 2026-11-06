@@ -5,7 +5,6 @@
   "block.piremastered.boiler_casing": "Boiler Casing",
   "block.piremastered.boiler_structural_glass": "Boiler Structural Glass",
   "block.piremastered.boiler_solid_fuel_burner": "Solid-Fuel Burner",
-  "block.piremastered.boiler_electric_superheater": "Electric Superheater",
   "block.piremastered.boiler_multipurpose_valve": "Multipurpose Valve",
   "fluid_type.piremastered.steam": "Industrial Steam"
 }
