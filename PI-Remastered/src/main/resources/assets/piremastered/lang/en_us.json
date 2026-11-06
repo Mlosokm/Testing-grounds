@@ -4,12 +4,8 @@
   "block.piremastered.industrial_boiler": "Industrial Boiler Access Panel",
   "block.piremastered.boiler_casing": "Boiler Casing",
   "block.piremastered.boiler_structural_glass": "Boiler Structural Glass",
-  "block.piremastered.boiler_firebox": "Standard Burner",
-  "block.piremastered.boiler_high_tier_burner": "High-Tier Burner",
-  "block.piremastered.boiler_superheater": "Boiler Superheater",
-  "block.piremastered.boiler_water_input": "Boiler Water Input Hatch",
-  "block.piremastered.boiler_steam_output": "Boiler Steam Output Hatch",
-  "block.piremastered.boiler_pressure_gauge": "Boiler Indicator Gauge",
-  "fluid_type.piremastered.steam": "Industrial Steam",
-  "fluid_type.piremastered.superheated_steam": "Superheated Steam"
+  "block.piremastered.boiler_solid_fuel_burner": "Solid-Fuel Burner",
+  "block.piremastered.boiler_electric_superheater": "Electric Superheater",
+  "block.piremastered.boiler_multipurpose_valve": "Multipurpose Valve",
+  "fluid_type.piremastered.steam": "Industrial Steam"
 }

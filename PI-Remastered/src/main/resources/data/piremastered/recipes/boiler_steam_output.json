@@ -1,1 +1,0 @@
-{"type":"minecraft:crafting_shaped","pattern":["ICI","IGI","III"],"key":{"I":{"item":"minecraft:iron_ingot"},"C":{"item":"minecraft:copper_ingot"},"G":{"item":"minecraft:glass"}},"result":{"item":"piremastered:boiler_steam_output"}}

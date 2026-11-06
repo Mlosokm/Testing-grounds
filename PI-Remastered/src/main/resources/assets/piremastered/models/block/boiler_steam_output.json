@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "piremastered:block/boiler_steam_output"
-  }
-}

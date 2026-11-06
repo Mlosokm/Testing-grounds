@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "IBI",
+    " C "
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "B": { "item": "minecraft:bucket" },
+    "C": { "item": "minecraft:copper_ingot" }
+  },
+  "result": {
+    "item": "piremastered:boiler_multipurpose_valve"
+  }
+}

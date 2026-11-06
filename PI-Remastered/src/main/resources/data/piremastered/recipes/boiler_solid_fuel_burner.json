@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IFI",
+    "ICI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "F": { "item": "minecraft:furnace" },
+    "C": { "item": "minecraft:copper_ingot" }
+  },
+  "result": {
+    "item": "piremastered:boiler_solid_fuel_burner"
+  }
+}
