@@ -17,16 +17,6 @@ public final class ModItems {
  public static final RegistryObject<Item> BOILER_WATER_INPUT=blockItem("boiler_water_input",ModBlocks.BOILER_WATER_INPUT);
  public static final RegistryObject<Item> BOILER_STEAM_OUTPUT=blockItem("boiler_steam_output",ModBlocks.BOILER_STEAM_OUTPUT);
  public static final RegistryObject<Item> BOILER_PRESSURE_GAUGE=blockItem("boiler_pressure_gauge",ModBlocks.BOILER_PRESSURE_GAUGE);
- public static final RegistryObject<Item> TURBINE_CASING=blockItem("turbine_casing",ModBlocks.TURBINE_CASING);
- public static final RegistryObject<Item> TURBINE_STRUCTURAL_GLASS=blockItem("turbine_structural_glass",ModBlocks.TURBINE_STRUCTURAL_GLASS);
- public static final RegistryObject<Item> TURBINE_VALVE=blockItem("turbine_valve",ModBlocks.TURBINE_VALVE);
- public static final RegistryObject<Item> TURBINE_ROTOR_SHAFT=blockItem("turbine_rotor_shaft",ModBlocks.TURBINE_ROTOR_SHAFT);
- public static final RegistryObject<Item> TURBINE_ROTATION_COMPLEX=blockItem("turbine_rotation_complex",ModBlocks.TURBINE_ROTATION_COMPLEX);
- public static final RegistryObject<Item> TURBINE_BLADE_COPPER=blockItem("turbine_blade_copper",ModBlocks.TURBINE_BLADE_COPPER);
- public static final RegistryObject<Item> TURBINE_BLADE_GOLD=blockItem("turbine_blade_gold",ModBlocks.TURBINE_BLADE_GOLD);
- public static final RegistryObject<Item> TURBINE_BLADE_IRON=blockItem("turbine_blade_iron",ModBlocks.TURBINE_BLADE_IRON);
- public static final RegistryObject<Item> TURBINE_BLADE_DIAMOND=blockItem("turbine_blade_diamond",ModBlocks.TURBINE_BLADE_DIAMOND);
- public static final RegistryObject<Item> TURBINE_BLADE_NETHERITE=blockItem("turbine_blade_netherite",ModBlocks.TURBINE_BLADE_NETHERITE);
  private static RegistryObject<Item> blockItem(String n,Supplier<? extends Block>b){return ITEMS.register(n,()->new BlockItem(b.get(),new Item.Properties()));}
  private ModItems(){}
 }
