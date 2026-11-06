@@ -1,18 +1,13 @@
 package com.piremastered.client;
 
-import com.piremastered.PIRemastered;
 import com.piremastered.menu.BoilerMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class BoilerScreen extends AbstractContainerScreen<BoilerMenu> {
-    private static final ResourceLocation TEXTURE =
-            new ResourceLocation(PIRemastered.MOD_ID, "textures/gui/boiler_gui.png");
-
     public BoilerScreen(BoilerMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
         imageWidth = 208;
@@ -35,7 +30,13 @@ public class BoilerScreen extends AbstractContainerScreen<BoilerMenu> {
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         int x = leftPos;
         int y = topPos;
-        graphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
+
+        // Dark steel panel background
+        graphics.fill(x, y, x + imageWidth, y + imageHeight, 0xFF1A1F24);
+        graphics.fill(x + 2, y + 2, x + imageWidth - 2, y + imageHeight - 2, 0xFF252B32);
+
+        // Header bar
+        graphics.fill(x + 4, y + 4, x + imageWidth - 4, y + 18, 0xFF2E3640);
 
         int water = clamp(menu.getData(1), 0, 16_000);
         int steam = clamp(menu.getData(2), 0, 16_000);
@@ -54,6 +55,8 @@ public class BoilerScreen extends AbstractContainerScreen<BoilerMenu> {
 
     private void drawMeter(GuiGraphics graphics, int x, int y, int meterX, int filledHeight, int color) {
         int bottom = y + 93;
+        // Track
+        graphics.fill(x + meterX, y + 36, x + meterX + 12, bottom + 2, 0xFF0E1216);
         graphics.fill(x + meterX + 2, y + 38, x + meterX + 10, bottom, 0xFF101719);
         if (filledHeight > 0) {
             graphics.fill(x + meterX + 2, bottom - filledHeight,
@@ -67,6 +70,8 @@ public class BoilerScreen extends AbstractContainerScreen<BoilerMenu> {
 
     @Override
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
+        graphics.drawString(font, title, titleLabelX, titleLabelY, 0xFFE8EEF2, false);
+
         graphics.drawString(font, "WATER", 14, 24, 0xFFB9D9E5, false);
         graphics.drawString(font, "FUEL", 63, 24, 0xFFFFC27D, false);
         graphics.drawString(font, "TEMP", 109, 24, 0xFFFFA08B, false);
