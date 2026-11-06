@@ -28,7 +28,7 @@ public final class BoilerStructureValidator {
   for(BlockPos p:shell){minX=Math.min(minX,p.getX());minY=Math.min(minY,p.getY());minZ=Math.min(minZ,p.getZ());maxX=Math.max(maxX,p.getX());maxY=Math.max(maxY,p.getY());maxZ=Math.max(maxZ,p.getZ());}
   int w=maxX-minX+1,h=maxY-minY+1,d=maxZ-minZ+1;
   if(w<3||h<3||d<3||w>15||h>15||d>15)return Result.invalid("Each boiler dimension must be between 3 and 15 blocks");
-  BlockPos firebox=null,water=null,steam=null;int heaters=0,highBurners=0;
+  BlockPos firebox=null,highTierFirebox=null,water=null,steam=null;int heaters=0,highBurners=0;
   for(int x=minX;x<=maxX;x++)for(int y=minY;y<=maxY;y++)for(int z=minZ;z<=maxZ;z++){
    BlockPos p=new BlockPos(x,y,z);BlockState s=level.getBlockState(p);
    boolean ex=x==minX||x==maxX,ey=y==minY||y==maxY,ez=z==minZ||z==maxZ;
@@ -42,7 +42,7 @@ public final class BoilerStructureValidator {
    }else if(!s.isAir()){
     if(s.is(ModBlocks.BOILER_FIREBOX.get())||s.is(ModBlocks.BOILER_HIGH_TIER_BURNER.get())){
      if(firebox==null)firebox=p;
-     if(s.getBlock() instanceof BoilerFireboxBlock b&&b.isHighTier())highBurners++;
+     if(s.getBlock() instanceof BoilerFireboxBlock b&&b.isHighTier()){highBurners++;highTierFirebox=p;}
     }else if(s.is(ModBlocks.BOILER_SUPERHEATER.get()))heaters++;
     else return Result.invalid("Unsupported block found inside boiler chamber");
    }
@@ -50,7 +50,7 @@ public final class BoilerStructureValidator {
   if(water==null||steam==null||firebox==null)return Result.invalid("Needs water input, steam output and at least one burner");
   if(!(level.getBlockEntity(water) instanceof BoilerWaterInputBlockEntity)||!(level.getBlockEntity(steam) instanceof BoilerSteamOutputBlockEntity))return Result.invalid("A fluid hatch block entity is missing");
   if(highBurners>0&&heaters==0)return Result.invalid("High-Tier Burner requires Boiler Superheater blocks");
-  return new Result(true,firebox,water,steam,heaters>0,highBurners>0,"");
+  return new Result(true,highTierFirebox!=null?highTierFirebox:firebox,water,steam,heaters>0,highBurners>0,"");
  }
  private static boolean isShell(BlockState s){
   return s.is(ModBlocks.BOILER_CASING.get())||s.is(ModBlocks.BOILER_STRUCTURAL_GLASS.get())||s.is(ModBlocks.INDUSTRIAL_BOILER.get())||s.is(ModBlocks.BOILER_WATER_INPUT.get())||s.is(ModBlocks.BOILER_STEAM_OUTPUT.get())||s.is(ModBlocks.BOILER_PRESSURE_GAUGE.get());
