@@ -59,8 +59,12 @@ public class BoilerFireboxBlockEntity extends BlockEntity {
         return super.getCapability(capability, side);
     }
 
+    public boolean ignite() {
+        return burnTime <= 0 && startFuel();
+    }
+
     public boolean consumeHeatTick() {
-        if (burnTime <= 0 && !startFuel()) {
+        if (burnTime <= 0) {
             return false;
         }
         burnTime--;

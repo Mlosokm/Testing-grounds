@@ -3,6 +3,7 @@ package com.piremastered.client;
 import com.piremastered.PIRemastered;
 import com.piremastered.menu.BoilerMenu;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -18,6 +19,16 @@ public class BoilerScreen extends AbstractContainerScreen<BoilerMenu> {
         imageHeight = 132;
         titleLabelX = 8;
         titleLabelY = 7;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        addRenderableWidget(Button.builder(Component.literal("IGNITE"), button -> {
+            if (minecraft != null && minecraft.gameMode != null) {
+                minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 0);
+            }
+        }).bounds(leftPos + 153, topPos + 112, 46, 14).build());
     }
 
     @Override

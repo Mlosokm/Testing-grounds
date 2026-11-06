@@ -64,6 +64,15 @@ public class BoilerControllerBlockEntity extends BlockEntity implements MenuProv
         return formed;
     }
 
+    public boolean igniteBurner() {
+        if (level == null || level.isClientSide) {
+            return false;
+        }
+        validateStructure();
+        BoilerFireboxBlockEntity burner = getBurner();
+        return formed && burner != null && burner.ignite();
+    }
+
     @Override
     public Component getDisplayName() {
         return Component.translatable("block.piremastered.industrial_boiler");
