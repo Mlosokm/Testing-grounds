@@ -22,19 +22,9 @@ A checked item means implemented in source, not necessarily verified in a live M
 - [ ] Optional temporary tank blocks and dynamic capacity.
 - [ ] In-game multiblock, fuel, pipe and save/reload verification.
 
-## Turbines — construction set added in 0.3.0
-- [x] Turbine Casing and Structural Glass.
-- [x] Turbine Valve, Rotor Shaft and Rotation Complex.
-- [x] Copper, Gold, Iron, Diamond and Netherite blade blocks.
-- [ ] Expandable turbine structure validation up to 15×15×15.
-- [ ] Blade clearance validation.
-- [ ] Live client-side spinning animation.
-- [ ] Steam consumption and pressure tolerance.
-- [ ] Blade weight/speed trade-offs.
-- [ ] Induction scanning for Lapis Lazuli, Copper, Iron, Gold, Diamond and Netherite blocks.
-- [ ] Activate Induction button and Forge Energy output capability.
-- [ ] Optional controller with right-click access on any valid component.
-- [ ] Balanced FE values in the turbine manual.
+## Turbines
+- [x] In-house turbine implementation cancelled; turbine visuals and mechanics are delegated to established turbine mods.
+- [ ] Consider optional compatibility/integration only if a concrete use case emerges.
 
 ## Later progressions
 - [ ] Industrial Mining (bounded 3×3 to 15×15 sizing, FE scaling, configured bedrock loot and nearest vein mode).
