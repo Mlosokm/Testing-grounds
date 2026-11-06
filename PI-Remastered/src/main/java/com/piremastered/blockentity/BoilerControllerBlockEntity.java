@@ -24,6 +24,7 @@ public class BoilerControllerBlockEntity extends BlockEntity implements MenuProv
     private int progress;
     private int ticks;
     private int temperatureC = 20;
+    private String lastError = "";
     private BlockPos burnerPos;
     private BlockPos waterValvePos;
     private BlockPos steamValvePos;
@@ -62,6 +63,10 @@ public class BoilerControllerBlockEntity extends BlockEntity implements MenuProv
 
     public boolean isFormed() {
         return formed;
+    }
+
+    public String getLastError() {
+        return lastError;
     }
 
     public boolean igniteBurner() {
@@ -152,11 +157,13 @@ public class BoilerControllerBlockEntity extends BlockEntity implements MenuProv
     private void validateStructure() {
         if (level == null) {
             formed = false;
+            lastError = "No level";
             return;
         }
 
         BoilerStructureValidator.Result result = BoilerStructureValidator.validate(level, worldPosition);
         formed = result.valid();
+        lastError = result.error();
         if (!formed) {
             burnerPos = null;
             waterValvePos = null;
@@ -226,6 +233,7 @@ public class BoilerControllerBlockEntity extends BlockEntity implements MenuProv
         tag.putBoolean("Formed", formed);
         tag.putInt("Progress", progress);
         tag.putInt("TemperatureC", temperatureC);
+        tag.putString("LastError", lastError);
     }
 
     @Override
@@ -234,6 +242,7 @@ public class BoilerControllerBlockEntity extends BlockEntity implements MenuProv
         formed = false;
         progress = tag.getInt("Progress");
         temperatureC = tag.contains("TemperatureC") ? tag.getInt("TemperatureC") : 20;
+        lastError = tag.contains("LastError") ? tag.getString("LastError") : "";
         burnerPos = null;
         waterValvePos = null;
         steamValvePos = null;
