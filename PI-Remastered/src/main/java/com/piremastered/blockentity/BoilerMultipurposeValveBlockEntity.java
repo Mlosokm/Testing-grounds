@@ -19,6 +19,19 @@ import org.jetbrains.annotations.Nullable;
 public class BoilerMultipurposeValveBlockEntity extends BlockEntity {
     public static final int TANK_CAPACITY = 16_000;
     private int steamTemperatureC = 100;
+    private ValveMode mode = ValveMode.AUTO;
+
+    public enum ValveMode {
+        AUTO, WATER, STEAM;
+
+        public ValveMode next() {
+            return switch (this) {
+                case AUTO -> WATER;
+                case WATER -> STEAM;
+                case STEAM -> AUTO;
+            };
+        }
+    }
 
     private final FluidTank tank = new FluidTank(TANK_CAPACITY, BoilerMultipurposeValveBlockEntity::isSupportedFluid) {
         @Override
@@ -50,6 +63,12 @@ public class BoilerMultipurposeValveBlockEntity extends BlockEntity {
 
         @Override
         public int fill(FluidStack resource, FluidAction action) {
+            if (mode == ValveMode.STEAM && resource.getFluid() != ModFluids.STEAM.get()) {
+                return 0;
+            }
+            if (mode == ValveMode.WATER && resource.getFluid() != Fluids.WATER) {
+                return 0;
+            }
             FluidStack normalized = resource.copy();
             int incomingTemperature = readTemperature(resource);
             normalized.setTag(null);
@@ -78,6 +97,15 @@ public class BoilerMultipurposeValveBlockEntity extends BlockEntity {
 
     public BoilerMultipurposeValveBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.BOILER_MULTIPURPOSE_VALVE.get(), pos, state);
+    }
+
+    public void cycleMode() {
+        mode = mode.next();
+        setChanged();
+    }
+
+    public ValveMode getMode() {
+        return mode;
     }
 
     private static boolean isSupportedFluid(FluidStack stack) {
@@ -136,6 +164,7 @@ public class BoilerMultipurposeValveBlockEntity extends BlockEntity {
         super.saveAdditional(tag);
         tag.put("Tank", tank.writeToNBT(new CompoundTag()));
         tag.putInt("SteamTemperatureC", steamTemperatureC);
+        tag.putString("Mode", mode.name());
     }
 
     @Override
@@ -145,5 +174,12 @@ public class BoilerMultipurposeValveBlockEntity extends BlockEntity {
             tank.readFromNBT(tag.getCompound("Tank"));
         }
         steamTemperatureC = tag.contains("SteamTemperatureC") ? tag.getInt("SteamTemperatureC") : 100;
+        if (tag.contains("Mode")) {
+            try {
+                mode = ValveMode.valueOf(tag.getString("Mode"));
+            } catch (IllegalArgumentException ignored) {
+                mode = ValveMode.AUTO;
+            }
+        }
     }
 }
